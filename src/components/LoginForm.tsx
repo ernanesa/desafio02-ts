@@ -33,7 +33,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <Stack gap="4">
-        <label htmlFor="email"> E-mail</label>
+        <label htmlFor="email">E-mail</label>
         <Input id="email" name="email" type="email" value={email} onChange={handleEmailChange} />
 
         <label htmlFor="password">Senha</label>
