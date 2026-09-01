@@ -1,3 +1,5 @@
-export function login(): void {
-  window.alert("Bem vinda!");
+export function login(name: string): void {
+  const normalizedName = name.trim();
+
+  window.alert(`Bem vinda ${normalizedName}!`);
 }

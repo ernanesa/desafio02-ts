@@ -18,7 +18,7 @@ function App() {
         py={{ base: "8", md: "16" }}
       >
         <Card>
-          <LoginForm onSubmit={() => login()} />
+          <LoginForm onSubmit={({ name }) => login(name)} />
         </Card>
       </Box>
     </Box>

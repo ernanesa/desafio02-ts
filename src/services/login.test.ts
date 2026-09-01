@@ -6,11 +6,15 @@ describe("login", () => {
     vi.restoreAllMocks();
   });
 
-  it("exibe a mensagem de boas-vindas", () => {
-    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => undefined);
+  it("exibe uma saudação personalizada", () => {
+    const alertMock = vi
+      .spyOn(window, "alert")
+      .mockImplementation(() => undefined);
 
-    login();
+    login("Maria");
 
-    expect(alertMock).toHaveBeenCalledWith("Bem vinda!");
+    expect(alertMock).toHaveBeenCalledWith(
+      "Bem vinda Maria!",
+    );
   });
 });
