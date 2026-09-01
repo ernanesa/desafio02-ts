@@ -6,10 +6,27 @@ type HeaderProps = {
 
 export function Header({ brand = "Dio Bank" }: HeaderProps) {
   return (
-    <Box as="header" borderBottomWidth="1px" bg="white">
-      <Box mx="auto" px={4} py={4} maxW="7xl">
-        <Link href="/" aria-label={`${brand} - página inicial`}>
-          <Heading as="h1" size="lg">
+    <Box
+      as="header"
+      position="sticky"
+      top="0"
+      zIndex="sticky"
+      bg="dio.card"
+      borderBottomWidth="1px"
+      borderBottomColor="dio.border"
+      boxShadow="sm"
+    >
+      <Box maxW="7xl" mx="auto" px={{ base: "4", md: "8" }} py="4">
+        <Link
+          href="/"
+          aria-label={`${brand} - página inicial`}
+          color="dio.text"
+          _hover={{
+            color: "dio.lavender",
+            textDecoration: "none",
+          }}
+        >
+          <Heading as="h1" size="lg" letterSpacing="tight">
             {brand}
           </Heading>
         </Link>

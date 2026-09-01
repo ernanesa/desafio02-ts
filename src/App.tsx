@@ -6,10 +6,17 @@ import { login } from "./services/login";
 
 function App() {
   return (
-    <Box minH="100vh" bg="gray.50">
+    <Box minH="100vh" bg="dio.canvas" color="dio.text">
       <Header />
 
-      <Box as="main" display="flex" justifyContent="center" px="4" py="12">
+      <Box
+        as="main"
+        display="grid"
+        placeItems="center"
+        minH="calc(100dvh - 72px)"
+        px={{ base: "4", md: "8" }}
+        py={{ base: "8", md: "16" }}
+      >
         <Card>
           <LoginForm onSubmit={() => login()} />
         </Card>
