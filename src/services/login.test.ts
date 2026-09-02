@@ -7,14 +7,10 @@ describe("login", () => {
   });
 
   it("exibe uma saudação personalizada", () => {
-    const alertMock = vi
-      .spyOn(window, "alert")
-      .mockImplementation(() => undefined);
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => undefined);
 
-    login("Maria");
+    login("João");
 
-    expect(alertMock).toHaveBeenCalledWith(
-      "Bem vinda Maria!",
-    );
+    expect(alertMock).toHaveBeenCalledWith("Bem vindo(a) João!");
   });
 });

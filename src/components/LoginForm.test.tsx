@@ -13,6 +13,7 @@ describe("LoginForm", () => {
       </ChakraProvider>,
     );
 
+    expect(screen.getByLabelText("Nome")).toBeInTheDocument();
     expect(screen.getByLabelText("E-mail")).toBeInTheDocument();
     expect(screen.getByLabelText("Senha")).toBeInTheDocument();
   });
@@ -27,11 +28,13 @@ describe("LoginForm", () => {
       </ChakraProvider>,
     );
 
+    await user.type(screen.getByLabelText("Nome"), "Maria");
     await user.type(screen.getByLabelText("E-mail"), "usuario@email.com");
     await user.type(screen.getByLabelText("Senha"), "123456");
     await user.click(screen.getByRole("button", { name: "Entrar" }));
 
     expect(handleSubmit).toHaveBeenCalledWith({
+      name: "Maria",
       email: "usuario@email.com",
       password: "123456",
     });

@@ -2,7 +2,7 @@ import { Field, Input, Stack } from "@chakra-ui/react";
 import type { ChangeEvent, SubmitEvent as ReactSubmitEvent } from "react";
 import { useState } from "react";
 import { Button } from "./Button";
-import { validateLogin, type LoginErrors, } from "../services/validation";
+import { validateLogin, type LoginErrors } from "../services/validation";
 
 export type LoginFormData = {
   name: string;
@@ -20,7 +20,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<LoginErrors>({});
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>,): void => {
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
   };
 
@@ -32,22 +32,18 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (
-    event: ReactSubmitEvent<HTMLFormElement>,
-  ): void => {
+  const handleSubmit = (event: ReactSubmitEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     const validationErrors = validateLogin({
+      name,
       email,
       password,
     });
 
     setErrors(validationErrors);
 
-    if (
-      validationErrors.email ||
-      validationErrors.password
-    ) {
+    if (validationErrors.name || validationErrors.email || validationErrors.password) {
       return;
     }
 
@@ -57,10 +53,8 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <Stack gap="6">
-        <Field.Root required>
-          <Field.Label color="dio.text">
-            Nome
-          </Field.Label>
+        <Field.Root required invalid={Boolean(errors.name)} id="name">
+          <Field.Label color="dio.text">Nome</Field.Label>
 
           <Input
             id="name"
@@ -74,14 +68,11 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
             borderColor="dio.border"
             onChange={handleNameChange}
           />
+
+          {errors.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
         </Field.Root>
-        <Field.Root
-          required
-          invalid={Boolean(errors.email)}
-        >
-          <Field.Label color="dio.text">
-            E-mail
-          </Field.Label>
+        <Field.Root required invalid={Boolean(errors.email)} id="email">
+          <Field.Label color="dio.text">E-mail</Field.Label>
 
           <Input
             id="email"
@@ -96,20 +87,11 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
             onChange={handleEmailChange}
           />
 
-          {errors.email && (
-            <Field.ErrorText>
-              {errors.email}
-            </Field.ErrorText>
-          )}
+          {errors.email && <Field.ErrorText>{errors.email}</Field.ErrorText>}
         </Field.Root>
 
-        <Field.Root
-          required
-          invalid={Boolean(errors.password)}
-        >
-          <Field.Label color="dio.text">
-            Senha
-          </Field.Label>
+        <Field.Root required invalid={Boolean(errors.password)} id="password">
+          <Field.Label color="dio.text">Senha</Field.Label>
 
           <Input
             id="password"
@@ -124,11 +106,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
             onChange={handlePasswordChange}
           />
 
-          {errors.password && (
-            <Field.ErrorText>
-              {errors.password}
-            </Field.ErrorText>
-          )}
+          {errors.password && <Field.ErrorText>{errors.password}</Field.ErrorText>}
         </Field.Root>
 
         <Button type="submit">Entrar</Button>
